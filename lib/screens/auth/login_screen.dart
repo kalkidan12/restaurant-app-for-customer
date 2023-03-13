@@ -5,9 +5,11 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/api/config.dart';
+import 'package:restaurantappforcustomer/screens/auth/register_page.dart';
 
 import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
+import '../home/home_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         setState(() {
           model = jsonDecode(response.body);
-          print(model['access']);
+          // print(model['access']);
           setState(() {
             usernameErrMsg = "";
             passwordErrMsg = "";
@@ -49,14 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
           tokens.setItem('refresh', model['refresh']);
         });
 
-        print(model);
+        // print(model);
         // ignore: use_build_context_synchronously
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const HomePage(),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
       } else {
         // debugPrint(response.body);
         print(jsonDecode(response.body));
@@ -212,13 +214,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             TextButton(
                               onPressed: () {
                                 // register screen
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         const RegisterScreen(),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterScreen(),
+                                  ),
+                                );
                               },
                               child: const Text(
                                 "Create new account",
