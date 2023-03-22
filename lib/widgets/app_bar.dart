@@ -12,7 +12,7 @@ class MyAppbar extends StatelessWidget {
       backgroundColor: Colors.blue,
       elevation: 0,
       title: const Text(
-        "Fast Track | Restaurant",
+        "OrderSupreme | Customer",
         style: TextStyle(
           color: Colors.white,
         ),

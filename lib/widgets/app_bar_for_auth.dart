@@ -13,7 +13,7 @@ class MyAppbarForAuthPage extends StatelessWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
       title: const Text(
-        "Fast Track | Customer",
+        "OrderSupreme | Customer",
         style: TextStyle(
           color: Colors.white,
         ),

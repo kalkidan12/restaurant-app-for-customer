@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   localstorage: ^4.0.0+1
+  date_field: ^3.0.0
+  # flutter_qr_bar_scanner: ^3.0.2
 
 dev_dependencies:
   flutter_test:

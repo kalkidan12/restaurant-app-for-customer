@@ -8,6 +8,7 @@ import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
 
 import '../../widgets/app_bar_for_auth.dart';
+import '../restaurant/restaurant_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,10 +43,10 @@ class _HomePageState extends State<HomePage> {
         //     "credit_card_info": ""
         // }
         print(response.body);
-        // final customerData = jsonDecode(response.body);
-        // customerProfile.setItem('customer_id', customerData['customer_id']);
-        // customerProfile.setItem('user_id', customerData['user_id']);
-        // customerProfile.setItem('phone_number', customerData['phone_number']);
+        final customerData = jsonDecode(response.body);
+        customerProfile.setItem('customer_id', customerData['customer_id']);
+        customerProfile.setItem('user_id', customerData['user_id']);
+        customerProfile.setItem('phone_number', customerData['phone_number']);
         // customerProfile.setItem(
         //     'payment_method', customerData['payment_method']);
         // customerProfile.setItem(
@@ -62,13 +63,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 235, 235, 235),
       resizeToAvoidBottomInset: false, //new line
-
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: MyAppbarForAuthPage(),
-      ),
       body: Container(
-        child: Text("Hello"),
+        child: const RestaurantList(),
       ),
     );
   }

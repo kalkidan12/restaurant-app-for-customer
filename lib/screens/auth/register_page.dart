@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           body: Stack(
             children: [
               Container(
-                height: height / 2 - 50,
+                height: height,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/images/register_banner.jpg"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:restaurantappforcustomer/screens/restaurant/restaurant_list.dart';
 // import 'package:restaurantapp/screens/inventory/inventory_page.dart';
 // import 'package:restaurantapp/screens/menu/menu_page.dart';
 // import 'package:restaurantapp/screens/order/order_page.dart';
@@ -30,13 +31,13 @@ class DrawerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  LocalStorage('restaurant').getItem('name'),
-                  style: const TextStyle(fontSize: 25, color: Colors.white),
-                ),
-                Text(LocalStorage('restaurant').getItem('location'),
-                    style: const TextStyle(fontSize: 17, color: Colors.white)),
-                Text(LocalStorage('restaurant').getItem('phone_number'),
+                // Text(
+                //   LocalStorage('customer').getItem('name'),
+                //   style: const TextStyle(fontSize: 25, color: Colors.white),
+                // ),
+                // Text(LocalStorage('customer').getItem('location'),
+                //     style: const TextStyle(fontSize: 17, color: Colors.white)),
+                Text(LocalStorage('customer').getItem('phone_number'),
                     style: const TextStyle(fontSize: 17, color: Colors.white)),
               ],
             ),
@@ -47,12 +48,14 @@ class DrawerWidget extends StatelessWidget {
               size: 30,
             ),
             title: const Text(
-              'Menus',
+              'Restaurants',
               style: TextStyle(fontSize: 18),
             ),
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => MenuList()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RestaurantList()));
             },
           ),
           ListTile(
@@ -61,7 +64,7 @@ class DrawerWidget extends StatelessWidget {
               size: 30,
             ),
             title: const Text(
-              'Tables',
+              'Booked Tables',
               style: TextStyle(fontSize: 18),
             ),
             onTap: () {
@@ -75,7 +78,7 @@ class DrawerWidget extends StatelessWidget {
               size: 30,
             ),
             title: const Text(
-              'Orders',
+              'My Orders',
               style: TextStyle(fontSize: 18),
             ),
             onTap: () {
@@ -83,33 +86,33 @@ class DrawerWidget extends StatelessWidget {
               //     MaterialPageRoute(builder: (context) => OrderList()));
             },
           ),
-          ListTile(
-            leading: Icon(
-              Icons.inventory,
-              size: 30,
-            ),
-            title: const Text(
-              'Inventories',
-              style: TextStyle(fontSize: 18),
-            ),
-            onTap: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => InventoryList()));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.payment,
-              size: 30,
-            ),
-            title: const Text(
-              'Payments',
-              style: TextStyle(fontSize: 18),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(
+          //     Icons.inventory,
+          //     size: 30,
+          //   ),
+          //   title: const Text(
+          //     'Inventories',
+          //     style: TextStyle(fontSize: 18),
+          //   ),
+          //   onTap: () {
+          //     // Navigator.push(context,
+          //     //     MaterialPageRoute(builder: (context) => InventoryList()));
+          //   },
+          // // ),
+          // ListTile(
+          //   leading: Icon(
+          //     Icons.payment,
+          //     size: 30,
+          //   ),
+          //   title: const Text(
+          //     'Payments',
+          //     style: TextStyle(fontSize: 18),
+          //   ),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
           ListTile(
             leading: Icon(
               Icons.logout,
