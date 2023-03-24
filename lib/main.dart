@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
+import 'package:restaurantappforcustomer/screens/scanner/scanner_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: const Color.fromARGB(255, 216, 216, 216),
       ),
-      home: const LoginScreen(),
+      home: const QR_Scanner(),
     );
   }
 }
