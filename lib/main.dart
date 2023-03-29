@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: const Color.fromARGB(255, 216, 216, 216),
       ),
-      home: const QR_Scanner(),
+      home: const LoginScreen(), // QR_Scanner(),
     );
   }
 }
