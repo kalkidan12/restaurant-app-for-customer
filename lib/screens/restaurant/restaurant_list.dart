@@ -1,4 +1,8 @@
 import 'dart:convert';
+import 'dart:async';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -53,6 +57,25 @@ class _RestaurantListState extends State<RestaurantList> {
     }
   }
 
+  String _scanBarcode = '';
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -65,12 +88,7 @@ class _RestaurantListState extends State<RestaurantList> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QR_Scanner(),
-            ),
-          );
+          scanQR();
         },
         child: Icon(Icons.qr_code_scanner),
       ),
@@ -257,6 +275,10 @@ class _RestaurantListState extends State<RestaurantList> {
                     },
                   )),
             ),
+            Text('$_scanBarcode\n', style: TextStyle(fontSize: 20)),
+            SizedBox(
+              height: 30,
+            )
           ]),
         ),
       ),
