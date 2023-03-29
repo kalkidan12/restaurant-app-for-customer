@@ -58,10 +58,12 @@ class _TablesListState extends State<TablesList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: const DrawerWidget(),
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: MyAppbar(),
+      // drawer: const DrawerWidget(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0), // here the desired height
+        child: MyAppbar(
+          appbarTitle: 'Tables',
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,

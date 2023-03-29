@@ -8,6 +8,7 @@ import 'package:restaurantappforcustomer/api/config.dart';
 
 import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
+import 'continue_reg_page.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -85,14 +86,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           tokens.setItem('refresh', model['refresh']);
 
           print("LOGIN SUCCESS : ${model['access']}");
-
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const ContinueREgister(),
-          //   ),
-          // );
         });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ContinueRegister(),
+          ),
+        );
       } else {
         print(jsonDecode(response.body));
 

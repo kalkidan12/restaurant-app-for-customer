@@ -11,14 +11,14 @@ import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
 import '../home/home_page.dart';
 
-class ContinueREgister extends StatefulWidget {
-  const ContinueREgister({super.key});
+class ContinueRegister extends StatefulWidget {
+  const ContinueRegister({super.key});
 
   @override
-  State<ContinueREgister> createState() => _ContinueREgisterState();
+  State<ContinueRegister> createState() => _ContinueRegisterState();
 }
 
-class _ContinueREgisterState extends State<ContinueREgister> {
+class _ContinueRegisterState extends State<ContinueRegister> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -75,7 +75,7 @@ class _ContinueREgisterState extends State<ContinueREgister> {
     }
   }
 
-  continueRegisterUser(data) async {
+  ContinueRegisterUser(data) async {
     // print(data);
     try {
       var url =
@@ -266,7 +266,7 @@ class _ContinueREgisterState extends State<ContinueREgister> {
                                     });
                                   } else {
                                     if (phone != '') {
-                                      continueRegisterUser({
+                                      ContinueRegisterUser({
                                         "phone_number": phone.toString(),
                                         "payment_method": "false",
                                         "credit_card_info": "111-111-111-111"

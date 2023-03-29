@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/api/config.dart';
 import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
+import 'package:restaurantappforcustomer/screens/table/tables_page.dart';
+import 'package:stylish_bottom_bar/model/bar_items.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import '../../widgets/app_bar_for_auth.dart';
 import '../restaurant/restaurant_list.dart';
@@ -31,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ContinueREgister(),
+            builder: (context) => const ContinueRegister(),
           ),
         );
         print("Not Created!");
@@ -57,14 +61,66 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  final screens = [
+    RestaurantList(),
+    RestaurantList(),
+    RestaurantList(),
+    RestaurantList(),
+  ];
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     isIExist();
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 235, 235, 235),
-      resizeToAvoidBottomInset: false, //new line
-      body: Container(
-        child: const RestaurantList(),
+      backgroundColor: Colors.white,
+      extendBody: true,
+      body: Center(
+        child: screens.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Colors.white,
+        itemCornerRadius: 30,
+        containerHeight: 60,
+        showElevation: false,
+        selectedIndex: _selectedIndex,
+        onItemSelected: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+              icon: Icon(Icons.restaurant),
+              title: Text('Restaurants'),
+              textAlign: TextAlign.center,
+              activeColor: Colors.blueAccent,
+              inactiveColor: Colors.blueGrey),
+          BottomNavyBarItem(
+              icon: Icon(Icons.table_bar),
+              title: Text('My Table'),
+              textAlign: TextAlign.center,
+              activeColor: Colors.blueAccent,
+              inactiveColor: Colors.blueGrey),
+          BottomNavyBarItem(
+              icon: Icon(Icons.shopping_cart),
+              title: Text('My Order'),
+              textAlign: TextAlign.center,
+              activeColor: Colors.blueAccent,
+              inactiveColor: Colors.blueGrey),
+          // BottomNavyBarItem(
+          //     icon: Icon(Icons.payment),
+          //     title: Text('Payment'),
+          //     textAlign: TextAlign.center,
+          //     activeColor: Colors.blueAccent,
+          //     inactiveColor: Colors.grey),
+          BottomNavyBarItem(
+              icon: Icon(Icons.person),
+              title: Text('Account'),
+              textAlign: TextAlign.center,
+              activeColor: Colors.blueAccent,
+              inactiveColor: Colors.blueGrey)
+        ],
       ),
     );
   }

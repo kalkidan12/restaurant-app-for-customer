@@ -4,15 +4,18 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class MyAppbar extends StatelessWidget {
-  const MyAppbar({super.key});
+  String? appbarTitle;
+  List<Widget>? actions;
+  MyAppbar({super.key, this.appbarTitle, this.actions});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.blue,
       elevation: 0,
-      title: const Text(
-        "OrderSupreme | Customer",
+      centerTitle: false,
+      title: Text(
+        '$appbarTitle',
         style: TextStyle(
           color: Colors.white,
         ),
@@ -29,6 +32,7 @@ class MyAppbar extends StatelessWidget {
           );
         },
       ),
+      actions: actions,
     );
   }
 }

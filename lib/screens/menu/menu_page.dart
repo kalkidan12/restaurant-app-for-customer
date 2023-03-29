@@ -57,14 +57,16 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: const DrawerWidget(),
+      // drawer: const DrawerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Text("Order"),
       ),
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: MyAppbar(),
+        child: MyAppbar(
+          appbarTitle: 'Menu',
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
