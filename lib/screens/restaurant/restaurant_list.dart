@@ -1,4 +1,8 @@
 import 'dart:convert';
+import 'dart:async';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -8,8 +12,8 @@ import 'package:restaurantappforcustomer/screens/table/tables_page.dart';
 
 import '../../api/config.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/darwer_widget.dart';
-import '../scanner/scanner_page.dart';
+// import '../../widgets/darwer_widget.dart';
+// import '../scanner/scanner_page.dart';
 
 class RestaurantList extends StatefulWidget {
   const RestaurantList({super.key});
@@ -53,6 +57,25 @@ class _RestaurantListState extends State<RestaurantList> {
     }
   }
 
+  String _scanBarcode = '';
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -63,21 +86,30 @@ class _RestaurantListState extends State<RestaurantList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QR_Scanner(),
-            ),
-          );
-        },
-        child: Icon(Icons.qr_code_scanner),
-      ),
-      drawer: const DrawerWidget(),
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: MyAppbar(),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   child: const Icon(Icons.qr_code_scanner),
+      // ),
+      // drawer: const DrawerWidget(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0), // here the desired height
+        child: MyAppbar(
+          appbarTitle: 'Restuarants',
+          actions: [
+            IconButton(
+                onPressed: () {
+                  scanQR();
+                },
+                icon: const Icon(
+                  Icons.qr_code,
+                  size: 30,
+                  color: Colors.white,
+                )),
+            const SizedBox(
+              width: 5,
+            )
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -148,101 +180,97 @@ class _RestaurantListState extends State<RestaurantList> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Container(
-                                      color: const Color.fromARGB(
-                                          255, 234, 234, 234),
-                                      padding: const EdgeInsets.all(10),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(50),
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/menu1.png',
-                                          fit: BoxFit.contain,
-                                          width: 80.0,
-                                          height: 80.0,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 120,
-                                      // width: MediaQuery.of(context).size.width - 174,
-                                      padding: const EdgeInsets.only(left: 10),
-                                      decoration: const BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 243, 243, 243),
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                restaurants[index].name,
-                                                style: const TextStyle(
-                                                    fontSize: 20.0,
-                                                    color: Color(0xFF000000),
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: "Merriweather"),
-                                              ),
-                                              // SizedBox(height: 10,),
-                                              SizedBox(
-                                                width: 110,
-                                                child: Text(
-                                                  restaurants[index].location,
-                                                  softWrap: true,
-                                                  style: const TextStyle(
-                                                      fontSize: 15.0,
-                                                      color: Color(0xFF000000),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontFamily:
-                                                          "Merriweather"),
-                                                ),
-                                              ),
-                                              Text(
-                                                restaurants[index].phoneNumber,
-                                                style: const TextStyle(
-                                                    fontSize: 16.0,
-                                                    color: Color(0xFF000000),
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: "Merriweather"),
-                                              ),
-                                            ],
+                                    Expanded(
+                                      child: Container(
+                                        width: 80,
+                                        height: 110,
+                                        color: const Color.fromARGB(
+                                            255, 234, 234, 234),
+                                        padding: const EdgeInsets.all(10),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(50),
                                           ),
-                                          Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10),
-                                              child: IconButton(
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: ((context) =>
-                                                          TablesList(
-                                                              restaurantId:
-                                                                  restaurants[
-                                                                          index]
-                                                                      .restaurantId)),
-                                                    ),
-                                                  );
-                                                },
-                                                icon: Icon(
-                                                  Icons.arrow_circle_right,
-                                                  color: Colors.blue[400],
-                                                  size: 30,
-                                                ),
-                                              ))
-                                        ],
+                                          child: Image.asset(
+                                            'assets/images/menu1.png',
+                                            fit: BoxFit.contain,
+                                            width: 80.0,
+                                            height: 80.0,
+                                          ),
+                                        ),
                                       ),
                                     ),
+                                    Expanded(
+                                      child: Container(
+                                        height: 120,
+                                        // width: MediaQuery.of(context).size.width - 174,
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        decoration: const BoxDecoration(
+                                          color: Color.fromARGB(
+                                              255, 243, 243, 243),
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              restaurants[index].name,
+                                              style: const TextStyle(
+                                                  fontSize: 20.0,
+                                                  color: Color(0xFF000000),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Merriweather"),
+                                            ),
+                                            // SizedBox(height: 10,),
+                                            Text(
+                                              restaurants[index].location,
+                                              softWrap: true,
+                                              style: const TextStyle(
+                                                  fontSize: 15.0,
+                                                  color: Color(0xFF000000),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Merriweather"),
+                                            ),
+                                            Text(
+                                              restaurants[index].phoneNumber,
+                                              style: const TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: Color(0xFF000000),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Merriweather"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                        padding: const EdgeInsets.only(left: 2),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    TablesList(
+                                                        restaurantId:
+                                                            restaurants[index]
+                                                                .restaurantId)),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_circle_right,
+                                            color: Colors.blue[400],
+                                            size: 30,
+                                          ),
+                                        ))
                                   ],
                                 ),
                               );
@@ -257,6 +285,10 @@ class _RestaurantListState extends State<RestaurantList> {
                     },
                   )),
             ),
+            Text('$_scanBarcode\n', style: TextStyle(fontSize: 20)),
+            SizedBox(
+              height: 30,
+            )
           ]),
         ),
       ),
