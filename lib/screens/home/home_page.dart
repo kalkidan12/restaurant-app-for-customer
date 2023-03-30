@@ -101,13 +101,13 @@ class _HomePageState extends State<HomePage> {
               inactiveColor: Colors.blueGrey),
           BottomNavyBarItem(
               icon: Icon(Icons.table_bar),
-              title: Text('My Table'),
+              title: Text('Booked Table'),
               textAlign: TextAlign.center,
               activeColor: Colors.blueAccent,
               inactiveColor: Colors.blueGrey),
           BottomNavyBarItem(
               icon: Icon(Icons.shopping_cart),
-              title: Text('My Order'),
+              title: Expanded(child: Text('My Order')),
               textAlign: TextAlign.center,
               activeColor: Colors.blueAccent,
               inactiveColor: Colors.blueGrey),

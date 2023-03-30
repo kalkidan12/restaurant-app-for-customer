@@ -59,7 +59,7 @@ class _TableOrderListState extends State<TableOrderList> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(
-          appbarTitle: 'My Tables',
+          appbarTitle: 'Booked Tables',
         ),
       ),
       body: Container(
@@ -73,7 +73,7 @@ class _TableOrderListState extends State<TableOrderList> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text(
-                  "Table Orders",
+                  "Tables",
                   style: TextStyle(
                       fontSize: 28.0,
                       color: Color.fromARGB(255, 90, 86, 97),
