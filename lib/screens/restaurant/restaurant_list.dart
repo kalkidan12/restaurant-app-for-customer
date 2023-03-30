@@ -41,7 +41,7 @@ class _RestaurantListState extends State<RestaurantList> {
         RestaurantModel mapedData =
             RestaurantModel.fromJson(jsonDecode(response.body));
         List<Result> restaurants = mapedData.results.toList();
-        // print(restaurants);
+        print(restaurants);
         setState(() {
           _isLoading = true;
         });
@@ -65,7 +65,7 @@ class _RestaurantListState extends State<RestaurantList> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
+      // print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -86,11 +86,6 @@ class _RestaurantListState extends State<RestaurantList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   child: const Icon(Icons.qr_code_scanner),
-      // ),
-      // drawer: const DrawerWidget(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
 import 'package:restaurantappforcustomer/screens/scanner/scanner_page.dart';
 
 void main() {
   runApp(const MyApp());
+  // Handles Status and Nav bar styling/theme
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.transparent,
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 }
 
 class MyApp extends StatelessWidget {

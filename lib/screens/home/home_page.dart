@@ -7,6 +7,9 @@ import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/api/config.dart';
 import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
+import 'package:restaurantappforcustomer/screens/order/menu_order_page.dart';
+import 'package:restaurantappforcustomer/screens/order/table_order_list.dart';
+import 'package:restaurantappforcustomer/screens/profile/customer_profile_page.dart';
 import 'package:restaurantappforcustomer/screens/table/tables_page.dart';
 import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
@@ -46,8 +49,8 @@ class _HomePageState extends State<HomePage> {
         //     "payment_method": false,
         //     "credit_card_info": ""
         // }
-        print(response.body);
-        final customerData = jsonDecode(response.body);
+        // print(response.body);
+        final customerData = await jsonDecode(response.body);
         customerProfile.setItem('customer_id', customerData['customer_id']);
         customerProfile.setItem('user_id', customerData['user_id']);
         customerProfile.setItem('phone_number', customerData['phone_number']);
@@ -63,9 +66,9 @@ class _HomePageState extends State<HomePage> {
 
   final screens = [
     RestaurantList(),
-    RestaurantList(),
-    RestaurantList(),
-    RestaurantList(),
+    TableOrderList(),
+    MenuOrderList(),
+    CustomerProfilePage(),
   ];
   int _selectedIndex = 0;
 

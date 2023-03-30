@@ -44,6 +44,10 @@ dependencies:
   date_field: ^3.0.0
   flutter_barcode_scanner: ^2.0.0
   bottom_navy_bar: ^6.0.0
+  shared_preferences: ^2.0.20
+  image_picker: ^0.8.7+1
+  string_validator: ^1.0.0
+  email_validator: ^2.1.17
   # flutter_qr_bar_scanner: ^3.0.2
 
 dev_dependencies:

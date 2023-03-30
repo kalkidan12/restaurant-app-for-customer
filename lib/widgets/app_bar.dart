@@ -11,6 +11,7 @@ class MyAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.blue,
       elevation: 0,
       centerTitle: false,
@@ -19,18 +20,6 @@ class MyAppbar extends StatelessWidget {
         style: TextStyle(
           color: Colors.white,
         ),
-      ),
-      leading: Builder(
-        builder: (BuildContext context) {
-          return IconButton(
-            icon: const Icon(Icons.menu),
-            color: Colors.white,
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          );
-        },
       ),
       actions: actions,
     );
