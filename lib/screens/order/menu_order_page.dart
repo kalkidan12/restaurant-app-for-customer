@@ -265,7 +265,7 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            'Pending',
+                                            'Placed',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(fontSize: 16),
                                           ),
