@@ -34,8 +34,8 @@ class _RestaurantListState extends State<RestaurantList> {
       var url = Uri.parse(
           '${ApiConstants.BASE_URL}${ApiConstants.RESTAURANTS}?search=${value.toString()}');
 
-      var response =
-          await http.get(url, headers: {"Authorization": "JWT $access_token"});
+      var response = await http
+          .get(url, headers: {"Authorization": "Bearer $access_token"});
 
       if (response.statusCode == 200) {
         RestaurantModel mapedData =

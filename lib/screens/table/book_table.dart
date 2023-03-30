@@ -91,7 +91,7 @@ class _BookTableState extends State<BookTable> {
       var url = Uri.parse('${ApiConstants.BASE_URL}${ApiConstants.BOOKTABLE}');
       final response = await http.post(
         url,
-        headers: {"Authorization": "JWT ${access_token}"},
+        headers: {"Authorization": "Bearer ${access_token}"},
         body: data,
       );
       if (response.statusCode == 201) {

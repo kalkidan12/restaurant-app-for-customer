@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       String access_token = LocalStorage('tokens').getItem('access');
       var url = Uri.parse(ApiConstants.BASE_URL + ApiConstants.USER_PROFILE);
       var response = await http
-          .get(url, headers: {"Authorization": "JWT " + access_token});
+          .get(url, headers: {"Authorization": "Bearer " + access_token});
       if (response.statusCode == 404) {
         // ignore: use_build_context_synchronously
         Navigator.push(

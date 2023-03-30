@@ -37,7 +37,7 @@ class _TablesListState extends State<TablesList> {
       var url = Uri.parse(
           '${ApiConstants.BASE_URL}${ApiConstants.TABLES}?restaurant=${widget.restaurantId}&isBooked=false');
       var response = await http
-          .get(url, headers: {"Authorization": "JWT " + access_token});
+          .get(url, headers: {"Authorization": "Bearer " + access_token});
       if (response.statusCode == 200) {
         List mapedData = json.decode(response.body) as List<dynamic>;
         List<TableModel> tables =
