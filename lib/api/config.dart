@@ -4,11 +4,11 @@ class ApiConstants {
   static String USER_LOGIN = '/auth/jwt/create/';
   static String USER_REGISTER = '/auth/users/';
   static String USER_ACCOUNT = '/auth/users/me/';
-  static String CUSTOMER_REGISTER = '/api/v1/fastrack/customer/';
-  static String RESTAURANTS = '/api/v1/fastrack/restaurant/';
-  static String USER_PROFILE = '/api/v1/fastrack/customer/me/';
-  static String MENUS = '/api/v1/fastrack/menu/';
-  static String TABLES = '/api/v1/fastrack/table/';
-  static String INVENTORIES = '/api/v1/fastrack/inventory/';
-  static String BOOKTABLE = '/api/v1/fastrack/booked_table/';
+  static String CUSTOMER_REGISTER = '/api/v1/ordersupreme/customer/';
+  static String RESTAURANTS = '/api/v1/ordersupreme/restaurant/';
+  static String USER_PROFILE = '/api/v1/ordersupreme/customer/me/';
+  static String MENUS = '/api/v1/ordersupreme/menu/';
+  static String TABLES = '/api/v1/ordersupreme/table/';
+  static String INVENTORIES = '/api/v1/ordersupreme/inventory/';
+  static String BOOKTABLE = '/api/v1/ordersupreme/booked_table/';
 }
