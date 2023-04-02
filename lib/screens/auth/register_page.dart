@@ -30,9 +30,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String user_type = 'C';
   late Map<String, dynamic> model;
   final LocalStorage tokens = LocalStorage('tokens');
-
+  bool onRegistering = false;
   registerUser(data) async {
     try {
+      onRegistering = true;
       var url = Uri.parse(ApiConstants.BASE_URL + ApiConstants.USER_REGISTER);
       var response = await http.post(url, body: data);
       loginUser(data['username'], data['password']);
@@ -51,6 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       } else {
         // print(jsonDecode(response.body)['password'][0]);
+        onRegistering = false;
 
         setState(() {
           usernameErrMsg = (jsonDecode(response.body)['username'] != null)
@@ -68,7 +70,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       }
     } catch (e) {
-      print(e);
+      onRegistering = false;
+      // print(e);
     }
   }
 
@@ -76,6 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     tokens.clear();
     var data = {"username": username, "password": password};
     try {
+      onRegistering = true;
       var url = Uri.parse(ApiConstants.BASE_URL + ApiConstants.USER_LOGIN);
       var response = await http.post(url, body: data);
       if (response.statusCode == 200) {
@@ -85,26 +89,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
           tokens.setItem('access', model['access']);
           tokens.setItem('refresh', model['refresh']);
 
-          print("LOGIN SUCCESS : ${model['access']}");
+          // print("LOGIN SUCCESS : ${model['access']}");
+          onRegistering = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ContinueRegister(),
+            ),
+          );
         });
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ContinueRegister(),
-          ),
-        );
       } else {
-        print(jsonDecode(response.body));
-
+        // print(jsonDecode(response.body));
+        onRegistering = false;
         setState(() {
           passwordErrMsg = jsonDecode(response.body)['detail'];
         });
       }
     } catch (e) {
-      print(e);
+      // print(e);
+      onRegistering = false;
+      passwordErrMsg = 'error occured please try again!';
     }
   }
 
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -115,195 +123,249 @@ class _RegisterScreenState extends State<RegisterScreen> {
         width: width,
         height: height,
         child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 235, 235, 235),
-          resizeToAvoidBottomInset: false, //new line
+            backgroundColor: const Color.fromARGB(255, 235, 235, 235),
+            resizeToAvoidBottomInset: false, //new line
 
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(50.0), // here the desired height
-            child: MyAppbarForAuthPage(),
-          ),
-          body: Stack(
-            children: [
-              Container(
+            // appBar: const PreferredSize(
+            //   preferredSize: Size.fromHeight(50.0), // here the desired height
+            //   child: MyAppbarForAuthPage(),
+            // ),
+            body: Container(
                 height: height,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/register_banner.jpg"),
+                    image: AssetImage("assets/images/bg4.jpg"),
                     fit: BoxFit.cover,
-                    opacity: 0.7,
+                    opacity: 0.9,
                   ),
                 ),
-                child: null /* add child content here */,
-              ),
-              Center(
-                child: CustomContainer(
-                  padding: const EdgeInsets.all(15),
-                  width: width - 50,
-                  height: 450,
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Register',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                            margin: const EdgeInsetsDirectional.only(top: 20),
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: TextField(
-                              controller: nameController,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                border: OutlineInputBorder(),
-                                labelText: 'Username',
-                              ),
-                            ),
-                          ),
-                          Text(
-                            usernameErrMsg,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: .8,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: TextField(
-                              keyboardType: TextInputType.emailAddress,
-                              controller: emailController,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                border: OutlineInputBorder(),
-                                labelText: 'Email',
-                              ),
-                            ),
-                          ),
-                          Text(
-                            emailErrMsg,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: .8,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: TextField(
-                              obscureText: true,
-                              controller: passwordController,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                border: OutlineInputBorder(),
-                                labelText: 'Password',
-                              ),
-                            ),
-                          ),
-                          Text(
-                            passwordErrMsg,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: .8,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            height: 35,
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  final username = nameController.text;
-                                  final email = emailController.text;
-                                  final password = passwordController.text;
-
-                                  if (username == '') {
-                                    setState(() {
-                                      usernameErrMsg =
-                                          "Username can not be empty";
-                                    });
-                                  } else {
-                                    setState(() {
-                                      usernameErrMsg = "";
-                                    });
-                                  }
-
-                                  if (email == '') {
-                                    setState(() {
-                                      emailErrMsg = "Emails can not be empty";
-                                    });
-                                  } else {
-                                    setState(() {
-                                      emailErrMsg = "";
-                                    });
-                                  }
-
-                                  if (password == '') {
-                                    setState(() {
-                                      passwordErrMsg =
-                                          "Password can not be empty";
-                                    });
-                                  } else {
-                                    setState(() {
-                                      passwordErrMsg = "";
-                                    });
-                                  }
-                                  if (username != '' &&
-                                      email != '' &&
-                                      password != '') {
-                                    registerUser({
-                                      "username": username,
-                                      "email": email,
-                                      "password": password,
-                                      "user_type": user_type,
-                                    });
-                                  }
-                                }
-                              },
+                child: Center(
+                  child: CustomContainer(
+                    padding: const EdgeInsets.all(20),
+                    width: width - 50,
+                    height: 390,
+                    color: Color.fromARGB(255, 255, 249, 249),
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          color: Color(0xffeeeeee),
+                          blurRadius: 10,
+                          offset: Offset(0, 4))
+                    ]),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 20),
                               child: const Text(
                                 'Register',
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const Text("Already have an account?"),
-                              TextButton(
-                                onPressed: () {
-                                  // already have an account
-                                  Navigator.pop(context);
-                                },
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      decoration: TextDecoration.underline),
+                            Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffeeeeee),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4))
+                                  ]),
+                              child: TextFormField(
+                                controller: nameController,
+                                decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 235, 235, 235),
+                                  prefixIcon: Icon(Icons.person),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                  border: InputBorder.none,
+                                  labelText: 'Username',
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      )),
-                ),
-              )
-            ],
-          ),
-        ));
+                            ),
+                            Text(
+                              usernameErrMsg,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: .8,
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffeeeeee),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4))
+                                  ]),
+                              child: TextField(
+                                keyboardType: TextInputType.emailAddress,
+                                controller: emailController,
+                                decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 235, 235, 235),
+                                  prefixIcon: Icon(Icons.email),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                  border: InputBorder.none,
+                                  labelText: 'Email',
+                                ),
+                              ),
+                            ),
+                            Text(
+                              emailErrMsg,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: .8,
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffeeeeee),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4))
+                                  ]),
+                              child: TextField(
+                                obscuringCharacter: '*',
+                                obscureText: showPassword ? false : true,
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 235, 235, 235),
+                                  prefixIcon: Icon(Icons.lock),
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          showPassword = !showPassword;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        showPassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      )),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                  border: InputBorder.none,
+                                  labelText: 'Password',
+                                ),
+                              ),
+                            ),
+                            Text(
+                              passwordErrMsg,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: .8,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              height: 35,
+                              width: 150,
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    final username = nameController.text;
+                                    final email = emailController.text;
+                                    final password = passwordController.text;
+
+                                    if (username == '') {
+                                      setState(() {
+                                        usernameErrMsg =
+                                            "Username can not be empty";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        usernameErrMsg = "";
+                                      });
+                                    }
+
+                                    if (email == '') {
+                                      setState(() {
+                                        emailErrMsg = "Emails can not be empty";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        emailErrMsg = "";
+                                      });
+                                    }
+
+                                    if (password == '') {
+                                      setState(() {
+                                        passwordErrMsg =
+                                            "Password can not be empty";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        passwordErrMsg = "";
+                                      });
+                                    }
+                                    if (username != '' &&
+                                        email != '' &&
+                                        password != '') {
+                                      registerUser({
+                                        "username": username,
+                                        "email": email,
+                                        "password": password,
+                                        "user_type": user_type,
+                                      });
+                                    }
+                                  }
+                                },
+                                child: onRegistering
+                                    ? Container(
+                                        width: 20,
+                                        height: 20,
+                                        child: const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Text('Register'),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                const Text(
+                                  "Already have an account?",
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // already have an account
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    'Login',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )),
+                  ),
+                ))));
   }
 }

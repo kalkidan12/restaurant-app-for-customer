@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +76,11 @@ class _ContinueRegisterState extends State<ContinueRegister> {
     }
   }
 
+  bool onRedirecting = false;
   ContinueRegisterUser(data) async {
     // print(data);
     try {
+      onRedirecting = true;
       var url =
           Uri.parse(ApiConstants.BASE_URL + ApiConstants.CUSTOMER_REGISTER);
       String access_token = LocalStorage('tokens').getItem('access');
@@ -85,14 +88,16 @@ class _ContinueRegisterState extends State<ContinueRegister> {
           body: data, headers: {"Authorization": "Bearer " + access_token});
       // print(response.statusCode);
       if (response.statusCode == 201) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
+        onRedirecting = false;
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const HomePage(),
+        //   ),
+        // );
       } else {
-        print(jsonDecode(response.body));
+        // print(jsonDecode(response.body));
+        onRedirecting = false;
 
         // setState(() {
         //   nameErrMsg = (jsonDecode(response.body)['name'] != null)
@@ -110,9 +115,16 @@ class _ContinueRegisterState extends State<ContinueRegister> {
         // });
       }
     } catch (e) {
-      print(e);
+      onRedirecting = false;
+      // print(e);
     }
   }
+
+  // final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController controller = TextEditingController();
+  String initialCountry = 'DE';
+  PhoneNumber number = PhoneNumber(isoCode: 'DE');
 
   @override
   Widget build(BuildContext context) {
@@ -123,169 +135,158 @@ class _ContinueRegisterState extends State<ContinueRegister> {
         width: width,
         height: height,
         child: Scaffold(
-          backgroundColor: Color.fromARGB(255, 235, 235, 235),
-          resizeToAvoidBottomInset: false, //new line
+            backgroundColor: Color.fromARGB(255, 235, 235, 235),
+            resizeToAvoidBottomInset: false, //new line
 
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(50.0), // here the desired height
-            child: MyAppbarForAuthPage(),
-          ),
-          body: Stack(
-            children: [
-              Container(
+            // appBar: const PreferredSize(
+            //   preferredSize: Size.fromHeight(50.0), // here the desired height
+            //   child: MyAppbarForAuthPage(),
+            // ),
+            body: Container(
                 height: height,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/register_banner.jpg"),
+                    image: AssetImage("assets/images/bg2.jpg"),
                     fit: BoxFit.cover,
                     opacity: 0.7,
                   ),
                 ),
-                child: null /* add child content here */,
-              ),
-              Center(
-                child: CustomContainer(
-                  padding: EdgeInsets.all(15),
-                  width: width - 50,
-                  height: 300,
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Continue registration',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          // Container(
-                          //   margin: const EdgeInsetsDirectional.only(top: 20),
-                          //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          //   child: TextField(
-                          //     controller: nameController,
-                          //     decoration: const InputDecoration(
-                          //       contentPadding:
-                          //           EdgeInsets.fromLTRB(10, 2, 10, 2),
-                          //       border: OutlineInputBorder(),
-                          //       labelText: 'Phone ',
-                          //     ),
-                          //   ),
-                          // ),
-                          // Text(
-                          //   nameErrMsg,
-                          //   style: const TextStyle(
-                          //     color: Colors.red,
-                          //     fontSize: 11,
-                          //     fontWeight: FontWeight.w400,
-                          //     letterSpacing: .8,
-                          //   ),
-                          // ),
-                          // Container(
-                          //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          //   child: TextField(
-                          //     keyboardType: TextInputType.streetAddress,
-                          //     controller: locationController,
-                          //     decoration: const InputDecoration(
-                          //       contentPadding:
-                          //           EdgeInsets.fromLTRB(10, 2, 10, 2),
-                          //       border: OutlineInputBorder(),
-                          //       labelText: 'Location',
-                          //     ),
-                          //   ),
-                          // ),
-                          // Text(
-                          //   locationErrMsg,
-                          //   style: const TextStyle(
-                          //     color: Colors.red,
-                          //     fontSize: 11,
-                          //     fontWeight: FontWeight.w400,
-                          //     letterSpacing: .8,
-                          //   ),
-                          // ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: TextField(
-                              keyboardType: TextInputType.phone,
-                              controller: phoneController,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                border: OutlineInputBorder(),
-                                labelText: 'Phone number',
+                child: Center(
+                  child: CustomContainer(
+                    padding: const EdgeInsets.all(15),
+                    width: width - 50,
+                    height: 250,
+                    color: const Color.fromARGB(255, 255, 249, 249),
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          color: Color(0xffeeeeee),
+                          blurRadius: 10,
+                          offset: Offset(0, 4))
+                    ]),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              child: const Text(
+                                'Continue registration',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          Text(
-                            phoneErrMsg,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: .8,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            height: 35,
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  final phone = phoneController.text;
-
-                                  if (phone == '') {
+                            Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color(0xffeeeeee),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 4))
+                                    ]),
+                                child: InternationalPhoneNumberInput(
+                                  autoFocus: true,
+                                  onInputChanged: (PhoneNumber number) {
                                     setState(() {
-                                      phoneErrMsg = "Password can not be empty";
+                                      this.number = number;
                                     });
-                                  } else {
+                                  },
+                                  errorMessage: 'Invalid phone number',
+                                  onInputValidated: (bool value) {},
+                                  selectorConfig: const SelectorConfig(
+                                    selectorType:
+                                        PhoneInputSelectorType.BOTTOM_SHEET,
+                                  ),
+                                  ignoreBlank: false,
+                                  autoValidateMode: AutovalidateMode.disabled,
+                                  selectorTextStyle:
+                                      const TextStyle(color: Colors.black),
+                                  initialValue: null,
+                                  textFieldController: controller,
+                                  formatInput: true,
+                                  keyboardType: TextInputType.phone,
+                                  inputBorder: InputBorder.none,
+                                  onSaved: (PhoneNumber number) {
                                     setState(() {
-                                      phoneErrMsg = "";
+                                      this.number = number;
                                     });
-                                  }
+                                  },
+                                )),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              height: 35,
+                              width: 150,
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    final phone = number.phoneNumber;
 
-                                  // print(_isProfileExist);
-                                  isProfileExist();
-
-                                  if (_isProfileExist) {
-                                    setState(() {
-                                      phoneErrMsg =
-                                          "you already created your account.";
-
-                                      sleep(Duration(seconds: 3));
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage(),
-                                        ),
-                                      );
-                                    });
-                                  } else {
-                                    if (phone != '') {
-                                      ContinueRegisterUser({
-                                        "phone_number": phone.toString(),
-                                        "payment_method": "false",
-                                        "credit_card_info": "111-111-111-111"
+                                    if (phone == '') {
+                                      setState(() {
+                                        phoneErrMsg =
+                                            "Phone number can not be empty";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        phoneErrMsg = "";
                                       });
                                     }
+
+                                    // print(_isProfileExist);
+                                    isProfileExist();
+
+                                    if (_isProfileExist) {
+                                      setState(() {
+                                        phoneErrMsg =
+                                            "you already created your account.";
+
+                                        sleep(const Duration(seconds: 3));
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomePage(),
+                                          ),
+                                        );
+                                      });
+                                    } else {
+                                      if (phone != '') {
+                                        ContinueRegisterUser({
+                                          "phone_number": phone.toString(),
+                                          "payment_method": "false",
+                                          "credit_card_info": "111-111-111-111"
+                                        });
+                                      }
+                                    }
                                   }
-                                }
-                              },
-                              child: const Text(
-                                'Submit',
+                                },
+                                child: onRedirecting
+                                    ? Container(
+                                        width: 20,
+                                        height: 20,
+                                        child: const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Text('Submit'),
                               ),
                             ),
-                          ),
-                        ],
-                      )),
-                ),
-              )
-            ],
-          ),
-        ));
+                          ],
+                        )),
+                  ),
+                ))));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

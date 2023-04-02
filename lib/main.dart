@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
 import 'package:restaurantappforcustomer/screens/scanner/scanner_page.dart';
 
@@ -22,10 +23,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: const Color.fromARGB(255, 216, 216, 216),
+        primarySwatch: Colors.orange,
+        // primaryColor: const Color.fromARGB(255, 216, 216, 216),
       ),
-      home: const LoginScreen(), // QR_Scanner(),
+      home: LoginScreen(), //ContinueRegister(), // QR_Scanner(),
     );
   }
 }
+
+//
+
