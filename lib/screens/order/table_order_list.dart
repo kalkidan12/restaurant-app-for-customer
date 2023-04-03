@@ -69,229 +69,217 @@ class _TableOrderListState extends State<TableOrderList> {
           appbarTitle: 'Booked Tables',
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(
-            8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Tables",
-                  style: TextStyle(
-                      fontSize: 28.0,
-                      color: Color.fromARGB(255, 90, 86, 97),
-                      fontWeight: FontWeight.w300,
-                      fontFamily: "Merriweather"),
-                ),
-                Icon(
-                  Icons.add,
-                  color: const Color(0xFF736c6c),
-                  size: 36.0,
-                ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(
+                8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 10),
+                Container(
+                    height: MediaQuery.of(context).size.height - 200,
+                    child: FutureBuilder<List<MenuModel>>(
+                      future: readJSon(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          List<MenuModel> menus = snapshot.data!;
+                          return ListView.builder(
+                              itemCount: menus.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: const EdgeInsets.only(bottom: 25),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 232, 248, 255),
+                                    boxShadow: List.filled(
+                                      3,
+                                      const BoxShadow(
+                                        blurRadius: 2,
+                                        blurStyle: BlurStyle.outer,
+                                        color: Color.fromARGB(31, 0, 52, 223),
+                                      ),
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: const [
+                                            Expanded(
+                                              child: Text(
+                                                '',
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                '3/30/2023',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(3),
+                                          color: Color.fromARGB(
+                                              255, 139, 180, 251),
+                                          width: double.infinity,
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: const [
+                                            Expanded(
+                                              child: Text(
+                                                'Restuarant Name',
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                'ABC Reataurant',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(3),
+                                          color: Color.fromARGB(
+                                              255, 139, 180, 251),
+                                          width: double.infinity,
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Table ID',
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                child: Container(
+                                                    width: double.infinity,
+                                                    child: ListView.builder(
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        shrinkWrap: true,
+                                                        itemCount: 2,
+                                                        itemBuilder:
+                                                            ((context, index) =>
+                                                                Row(
+                                                                  children: const [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        'Table ID',
+                                                                        textAlign:
+                                                                            TextAlign.left,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )))),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(3),
+                                          color: Color.fromARGB(
+                                              255, 139, 180, 251),
+                                          width: double.infinity,
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: const [
+                                            Expanded(
+                                              child: Text(
+                                                'Order_status',
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                'Placed',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(3),
+                                          color: Color.fromARGB(
+                                              255, 139, 180, 251),
+                                          width: double.infinity,
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: const [
+                                            Expanded(
+                                              child: Text(
+                                                'Total Price',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                '\$233',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(3),
+                                          color: Color.fromARGB(
+                                              255, 139, 180, 251),
+                                          width: double.infinity,
+                                          height: 3,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        } else {
+                          return Center(
+                              child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  child: const CircularProgressIndicator()));
+                        }
+                      },
+                    )),
               ],
             ),
-            const Divider(
-              color: Colors.black87,
-            ),
-            const SizedBox(height: 10),
-            Container(
-                height: MediaQuery.of(context).size.height - 200,
-                child: FutureBuilder<List<MenuModel>>(
-                  future: readJSon(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<MenuModel> menus = snapshot.data!;
-                      return ListView.builder(
-                          itemCount: menus.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(bottom: 25),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 232, 248, 255),
-                                boxShadow: List.filled(
-                                  3,
-                                  const BoxShadow(
-                                    blurRadius: 2,
-                                    blurStyle: BlurStyle.outer,
-                                    color: Color.fromARGB(31, 0, 52, 223),
-                                  ),
-                                ),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Expanded(
-                                          child: Text(
-                                            '',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '3/30/2023',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
-                                      width: double.infinity,
-                                      height: 3,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Expanded(
-                                          child: Text(
-                                            'Restuarant Name',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'ABC Reataurant',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
-                                      width: double.infinity,
-                                      height: 3,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Table ID',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                                width: double.infinity,
-                                                child: ListView.builder(
-                                                    physics:
-                                                        NeverScrollableScrollPhysics(),
-                                                    shrinkWrap: true,
-                                                    itemCount: 2,
-                                                    itemBuilder:
-                                                        ((context, index) =>
-                                                            Row(
-                                                              children: const [
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    'Table ID',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            16),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
-                                      width: double.infinity,
-                                      height: 3,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Expanded(
-                                          child: Text(
-                                            'Order_status',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'Placed',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
-                                      width: double.infinity,
-                                      height: 3,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Expanded(
-                                          child: Text(
-                                            'Total Price',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '\$233',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
-                                      width: double.infinity,
-                                      height: 3,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
-                    } else {
-                      return Center(
-                          child: Container(
-                              width: 40,
-                              height: 40,
-                              child: const CircularProgressIndicator()));
-                    }
-                  },
-                )),
-          ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -26,7 +25,6 @@ class _RestaurantListState extends State<RestaurantList> {
   bool _isLoading = false;
   String _searchQuery = '';
   final searchController = TextEditingController();
-
   Future<List<Result>> readJSon(value) async {
     // if(value.toString().isEmpty)
     try {
@@ -132,6 +130,8 @@ class _RestaurantListState extends State<RestaurantList> {
                 width: MediaQuery.of(context).size.width - 50,
                 child: TextFormField(
                   // controller: nameController,
+                  textAlignVertical: TextAlignVertical.center,
+
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Color.fromARGB(255, 240, 240, 240),
@@ -141,7 +141,7 @@ class _RestaurantListState extends State<RestaurantList> {
                       ),
                       contentPadding: EdgeInsets.fromLTRB(10, 2, 10, 2),
                       border: InputBorder.none,
-                      labelText: 'search restaurant',
+                      hintText: 'search restaurant',
                       labelStyle:
                           TextStyle(color: Color.fromARGB(255, 1, 101, 183))),
                 ),

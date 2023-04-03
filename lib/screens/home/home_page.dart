@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
   final screens = [
     RestaurantList(),
-    TableOrderList(),
+    MenuOrderList(),
     MenuOrderList(),
     CustomerProfilePage(),
   ];
@@ -104,16 +104,16 @@ class _HomePageState extends State<HomePage> {
             label: 'Restaurants',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.table_bar),
-            label: 'Tables',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'Orders',
+            label: 'My Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Account',
           ),
         ],
       ),

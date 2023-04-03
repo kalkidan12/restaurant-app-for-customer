@@ -55,7 +55,6 @@ class _MenuOrderListState extends State<MenuOrderList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: DrawerWidget(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(
@@ -69,27 +68,6 @@ class _MenuOrderListState extends State<MenuOrderList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Menu Orders",
-                  style: TextStyle(
-                      fontSize: 28.0,
-                      color: Color.fromARGB(255, 90, 86, 97),
-                      fontWeight: FontWeight.w300,
-                      fontFamily: "Merriweather"),
-                ),
-                Icon(
-                  Icons.add,
-                  color: const Color(0xFF736c6c),
-                  size: 36.0,
-                ),
-              ],
-            ),
-            const Divider(
-              color: Colors.black87,
-            ),
             const SizedBox(height: 10),
             Container(
                 height: MediaQuery.of(context).size.height - 200,
@@ -104,13 +82,13 @@ class _MenuOrderListState extends State<MenuOrderList> {
                             return Container(
                               margin: const EdgeInsets.only(bottom: 25),
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 232, 248, 255),
+                                color: const Color.fromARGB(255, 241, 241, 241),
                                 boxShadow: List.filled(
                                   3,
                                   const BoxShadow(
-                                    blurRadius: 2,
+                                    blurRadius: 4,
                                     blurStyle: BlurStyle.outer,
-                                    color: Color.fromARGB(31, 0, 52, 223),
+                                    color: Color.fromARGB(31, 222, 222, 222),
                                   ),
                                 ),
                                 borderRadius: BorderRadius.circular(15),
@@ -141,9 +119,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -167,9 +145,35 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: const [
+                                        Expanded(
+                                          child: Text(
+                                            'Table ID',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Table #2',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.all(3),
+                                      color: Colors.lightBlue,
+                                      width: double.infinity,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -193,9 +197,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -248,9 +252,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -274,9 +278,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -300,9 +304,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -326,9 +330,9 @@ class _MenuOrderListState extends State<MenuOrderList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.all(3),
-                                      color: Color.fromARGB(255, 139, 180, 251),
+                                      color: Colors.lightBlue,
                                       width: double.infinity,
-                                      height: 3,
+                                      height: 1.5,
                                     ),
                                   ],
                                 ),

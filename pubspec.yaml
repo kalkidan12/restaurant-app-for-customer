@@ -52,6 +52,7 @@ dependencies:
   animated_background: ^2.0.0
   flutter_otp_text_field: ^1.1.0+2
   new_gradient_app_bar: ^0.2.0
+  badges: ^3.0.3
   # flutter_qr_bar_scanner: ^3.0.2
 
 dev_dependencies:

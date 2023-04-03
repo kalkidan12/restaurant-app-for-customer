@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:badges/badges.dart' as badges;
 
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
@@ -53,9 +54,15 @@ class _MenuPageState extends State<MenuPage> {
     readJSon();
   }
 
+  int _cartBadgeAmount = 3;
+  late bool _showCartBadge;
+  Color color = Colors.red;
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
+    _showCartBadge = _cartBadgeAmount > 0;
+
     return Scaffold(
       // drawer: const DrawerWidget(),
       floatingActionButton: FloatingActionButton(
@@ -65,7 +72,11 @@ class _MenuPageState extends State<MenuPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0), // here the desired height
         child: MyAppbar(
-          actions: [],
+          actions: [
+            Container(
+                margin: EdgeInsets.only(right: 10),
+                child: _shoppingCartBadge()),
+          ],
           appbarTitle: 'Menu',
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48.0),
@@ -74,6 +85,7 @@ class _MenuPageState extends State<MenuPage> {
                 margin: const EdgeInsets.only(top: 10, bottom: 10),
                 width: MediaQuery.of(context).size.width - 50,
                 child: TextFormField(
+                  textAlignVertical: TextAlignVertical.center,
                   // controller: nameController,
                   decoration: InputDecoration(
                       filled: true,
@@ -87,7 +99,7 @@ class _MenuPageState extends State<MenuPage> {
                       ),
                       contentPadding: EdgeInsets.fromLTRB(10, 2, 10, 2),
                       border: InputBorder.none,
-                      labelText: 'search menu foods',
+                      hintText: 'search menu foods',
                       labelStyle:
                           TextStyle(color: Color.fromARGB(255, 1, 101, 183))),
                 ),
@@ -269,6 +281,25 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _shoppingCartBadge() {
+    return badges.Badge(
+      position: badges.BadgePosition.topEnd(top: 0, end: 3),
+      badgeAnimation: badges.BadgeAnimation.slide(
+          // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+          // curve: Curves.easeInCubic,
+          ),
+      showBadge: _showCartBadge,
+      badgeStyle: badges.BadgeStyle(
+        badgeColor: color,
+      ),
+      badgeContent: Text(
+        _cartBadgeAmount.toString(),
+        style: TextStyle(color: Colors.white),
+      ),
+      child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
     );
   }
 }
