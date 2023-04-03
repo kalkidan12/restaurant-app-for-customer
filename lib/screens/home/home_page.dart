@@ -1,20 +1,13 @@
 import 'dart:convert';
 
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/api/config.dart';
 import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
-import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
 import 'package:restaurantappforcustomer/screens/order/menu_order_page.dart';
-import 'package:restaurantappforcustomer/screens/order/table_order_list.dart';
 import 'package:restaurantappforcustomer/screens/profile/customer_profile_page.dart';
-import 'package:restaurantappforcustomer/screens/table/tables_page.dart';
-import 'package:stylish_bottom_bar/model/bar_items.dart';
-import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-import '../../widgets/app_bar_for_auth.dart';
 import '../restaurant/restaurant_list.dart';
 
 class HomePage extends StatefulWidget {
