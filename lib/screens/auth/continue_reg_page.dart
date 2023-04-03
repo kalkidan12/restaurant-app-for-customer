@@ -153,11 +153,6 @@ class _ContinueRegisterState extends State<ContinueRegister> {
                       Color.fromARGB(255, 185, 222, 237),
                     ],
                   ),
-                  // image: DecorationImage(
-                  //   image: AssetImage("assets/images/bg2.jpg"),
-                  //   fit: BoxFit.cover,
-                  //   opacity: 0.7,
-                  // ),
                 ),
                 child: Center(
                   child: CustomContainer(
