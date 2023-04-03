@@ -51,18 +51,16 @@ class _ResetPasswordState extends State<ResetPassword> {
         child: Scaffold(
             backgroundColor: Color.fromARGB(255, 235, 235, 235),
             resizeToAvoidBottomInset: false, //new line
-
-            // appBar: const PreferredSize(
-            //   preferredSize: Size.fromHeight(50.0), // here the desired height
-            //   child: MyAppbarForAuthPage(),
-            // ),
             body: Container(
                 height: height,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/reset_bg.jpg"),
-                    fit: BoxFit.cover,
-                    opacity: 0.7,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 232, 192, 239),
+                      Color.fromARGB(255, 185, 222, 237),
+                    ],
                   ),
                 ),
                 child: Center(

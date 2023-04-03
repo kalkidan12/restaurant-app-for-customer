@@ -96,24 +96,24 @@ class _LoginScreenState extends State<LoginScreen> {
               body: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/bg1.jpg"),
+                      image: AssetImage("assets/images/login.jpg"),
                       fit: BoxFit.cover,
                       opacity: 0.7,
                     ),
                     gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 234, 148, 82),
-                        Color.fromARGB(255, 227, 124, 118),
-                      ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromARGB(255, 232, 192, 239),
+                        Color.fromARGB(255, 185, 222, 237),
+                      ],
                     ),
                   ),
                   child: Center(
                     child: CustomContainer(
                       padding: const EdgeInsets.all(20),
                       width: width - 60,
-                      height: 320,
+                      height: 350,
                       color: Color.fromARGB(255, 255, 249, 249),
                       decoration: const BoxDecoration(boxShadow: [
                         BoxShadow(
@@ -125,9 +125,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Form(
                           key: _formKey,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Container(
+                                decoration: BoxDecoration(),
+                                // padding:
+                                // const EdgeInsets.only(top: 10, bottom: 10),
+                                child: const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                               Container(
                                 decoration: const BoxDecoration(
                                     color: Colors.white,

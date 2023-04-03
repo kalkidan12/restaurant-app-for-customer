@@ -23,8 +23,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
-        // primaryColor: const Color.fromARGB(255, 216, 216, 216),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: Colors.lightBlue,
+        ),
       ),
       home: LoginScreen(), //ContinueRegister(), // QR_Scanner(),
     );

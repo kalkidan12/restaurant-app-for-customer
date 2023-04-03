@@ -81,48 +81,40 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: screens.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavyBar(
+      bottomNavigationBar: BottomNavigationBar(
+        // configure the appearance and behavior of the bottom navigation bar
+        showUnselectedLabels: true,
+        selectedFontSize: 16,
+        unselectedFontSize: 14,
+        selectedItemColor: Color.fromARGB(255, 1, 101, 183),
+        unselectedItemColor: Color.fromARGB(255, 104, 104, 104),
         backgroundColor: Colors.white,
-        itemCornerRadius: 30,
-        containerHeight: 60,
-        showElevation: false,
-        selectedIndex: _selectedIndex,
-        onItemSelected: (index) {
+
+        currentIndex: _selectedIndex, // set the current selected index
+        onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
-        },
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-              icon: Icon(Icons.restaurant),
-              title: Text('Restaurants'),
-              textAlign: TextAlign.center,
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.blueGrey),
-          BottomNavyBarItem(
-              icon: Icon(Icons.table_bar),
-              title: Text('Booked Table'),
-              textAlign: TextAlign.center,
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.blueGrey),
-          BottomNavyBarItem(
-              icon: Icon(Icons.shopping_cart),
-              title: Expanded(child: Text('My Order')),
-              textAlign: TextAlign.center,
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.blueGrey),
-          // BottomNavyBarItem(
-          //     icon: Icon(Icons.payment),
-          //     title: Text('Payment'),
-          //     textAlign: TextAlign.center,
-          //     activeColor: Colors.blueAccent,
-          //     inactiveColor: Colors.grey),
-          BottomNavyBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Account'),
-              textAlign: TextAlign.center,
-              activeColor: Colors.blueAccent,
-              inactiveColor: Colors.blueGrey)
+        }, // callback function for when an item is tapped
+        type: BottomNavigationBarType.fixed,
+        // create the list of navigation bar items
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant),
+            label: 'Restaurants',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.table_bar),
+            label: 'Tables',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
         ],
       ),
     );

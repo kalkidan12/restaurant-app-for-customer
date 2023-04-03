@@ -55,7 +55,14 @@ class _TableOrderListState extends State<TableOrderList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: DrawerWidget(),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: 50),
+        child: FloatingActionButton(
+          backgroundColor: Color.fromARGB(255, 1, 101, 183),
+          onPressed: () {},
+          child: Icon(Icons.qr_code),
+        ),
+      ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(

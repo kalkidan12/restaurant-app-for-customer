@@ -145,11 +145,19 @@ class _ContinueRegisterState extends State<ContinueRegister> {
             body: Container(
                 height: height,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bg2.jpg"),
-                    fit: BoxFit.cover,
-                    opacity: 0.7,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 232, 192, 239),
+                      Color.fromARGB(255, 185, 222, 237),
+                    ],
                   ),
+                  // image: DecorationImage(
+                  //   image: AssetImage("assets/images/bg2.jpg"),
+                  //   fit: BoxFit.cover,
+                  //   opacity: 0.7,
+                  // ),
                 ),
                 child: Center(
                   child: CustomContainer(

@@ -54,17 +54,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
             body: Container(
                 height: height,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/reset_bg.jpg"),
-                    fit: BoxFit.cover,
-                    opacity: 0.8,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 232, 192, 239),
+                      Color.fromARGB(255, 185, 222, 237),
+                    ],
                   ),
                 ),
                 child: Center(
                   child: CustomContainer(
                     padding: const EdgeInsets.all(20),
                     width: width - 50,
-                    height: 180,
+                    height: 220,
                     color: const Color.fromARGB(255, 255, 249, 249),
                     decoration: const BoxDecoration(boxShadow: [
                       BoxShadow(
@@ -108,39 +111,39 @@ class _VerifyScreenState extends State<VerifyScreen> {
                                               'Code entered is $verificationCode'),
                                         );
                                       });
-                                  sleep(Duration(seconds: 5));
+                                  // sleep(Duration(seconds: 5));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             SetNewPassword()));
+                                }, // end onSubmit
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              height: 35,
+                              width: 150,
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: ElevatedButton(
+                                onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               SetNewPassword()));
-                                }, // end onSubmit
+                                },
+                                child: onReseting
+                                    ? Container(
+                                        width: 20,
+                                        height: 20,
+                                        child: const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Text('Verify'),
                               ),
                             ),
-                            // Container(
-                            //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            //   height: 35,
-                            //   width: 150,
-                            //   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            //   child: ElevatedButton(
-                            //     onPressed: () {
-                            //       Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) =>
-                            //                   SetNewPassword()));
-                            //     },
-                            //     child: onReseting
-                            //         ? Container(
-                            //             width: 20,
-                            //             height: 20,
-                            //             child: const CircularProgressIndicator(
-                            //               color: Colors.white,
-                            //             ),
-                            //           )
-                            //         : const Text('Verify'),
-                            //   ),
-                            // ),
                           ],
                         )),
                   ),

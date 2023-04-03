@@ -134,9 +134,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: height,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/bg4.jpg"),
+                    image: AssetImage("assets/images/login2.jpg"),
                     fit: BoxFit.cover,
                     opacity: 0.9,
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 232, 192, 239),
+                      Color.fromARGB(255, 185, 222, 237),
+                    ],
                   ),
                 ),
                 child: Center(

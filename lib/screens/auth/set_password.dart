@@ -50,18 +50,13 @@ class _SetNewPasswordState extends State<SetNewPassword> {
 
               body: Container(
                   decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/reset_bg.jpg"),
-                      fit: BoxFit.cover,
-                      opacity: 0.7,
-                    ),
                     gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 234, 148, 82),
-                        Color.fromARGB(255, 227, 124, 118),
-                      ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromARGB(255, 232, 192, 239),
+                        Color.fromARGB(255, 185, 222, 237),
+                      ],
                     ),
                   ),
                   child: Center(

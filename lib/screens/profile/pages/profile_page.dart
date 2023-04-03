@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Column(
         children: [
-          const Center(
+          Center(
               child: Padding(
                   padding: EdgeInsets.only(bottom: 20, top: 20),
                   child: Text(
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
-                      color: Colors.blueAccent,
+                      color: Colors.orange[800],
                     ),
                   ))),
           InkWell(
@@ -53,10 +53,11 @@ class _ProfilePageState extends State<ProfilePage> {
           buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
           buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
           buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
-          Expanded(
-            child: buildAbout(user),
-            flex: 4,
-          )
+          buildUserInfoDisplay(user.email, 'Password', EditEmailFormPage()),
+          // Expanded(
+          //   child: buildAbout(user),
+          //   flex: 4,
+          // )
         ],
       ),
     );
@@ -109,54 +110,54 @@ class _ProfilePageState extends State<ProfilePage> {
           ));
 
   // Widget builds the About Me Section
-  Widget buildAbout(User user) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Tell Us About Yourself',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Container(
-              width: 350,
-              height: 200,
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.grey,
-                width: 1,
-              ))),
-              child: Row(children: [
-                Expanded(
-                    child: TextButton(
-                        onPressed: () {
-                          navigateSecondPage(EditDescriptionFormPage());
-                        },
-                        child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                            child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  user.aboutMeDescription,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    height: 1.4,
-                                  ),
-                                ))))),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.grey,
-                  size: 40.0,
-                )
-              ]))
-        ],
-      ));
+  // Widget buildAbout(User user) => Padding(
+  //     padding: EdgeInsets.only(bottom: 10),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         const Text(
+  //           'Tell Us About Yourself',
+  //           style: TextStyle(
+  //             fontSize: 15,
+  //             fontWeight: FontWeight.w500,
+  //             color: Colors.grey,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 1),
+  //         Container(
+  //             width: 350,
+  //             height: 200,
+  //             decoration: const BoxDecoration(
+  //                 border: Border(
+  //                     bottom: BorderSide(
+  //               color: Colors.grey,
+  //               width: 1,
+  //             ))),
+  //             child: Row(children: [
+  //               Expanded(
+  //                   child: TextButton(
+  //                       onPressed: () {
+  //                         navigateSecondPage(EditDescriptionFormPage());
+  //                       },
+  //                       child: Padding(
+  //                           padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+  //                           child: Align(
+  //                               alignment: Alignment.topLeft,
+  //                               child: Text(
+  //                                 user.aboutMeDescription,
+  //                                 style: const TextStyle(
+  //                                   fontSize: 16,
+  //                                   height: 1.4,
+  //                                 ),
+  //                               ))))),
+  //               const Icon(
+  //                 Icons.keyboard_arrow_right,
+  //                 color: Colors.grey,
+  //                 size: 40.0,
+  //               )
+  //             ]))
+  //       ],
+  //     ));
 
   // Refrshes the Page after updating user info.
   FutureOr onGoBack(dynamic value) {
