@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Column(
         children: [
-          Center(
+          const Center(
               child: Padding(
                   padding: EdgeInsets.only(bottom: 20, top: 20),
                   child: Text(
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
-                      color: Colors.orange[800],
+                      color: Colors.lightBlue,
                     ),
                   ))),
           InkWell(

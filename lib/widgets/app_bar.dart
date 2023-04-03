@@ -14,7 +14,7 @@ class MyAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return NewGradientAppBar(
       gradient: LinearGradient(
-          colors: [Color.fromARGB(255, 1, 101, 183), Colors.lightBlue]),
+          colors: [Color.fromARGB(255, 39, 150, 241), Colors.lightBlue]),
       automaticallyImplyLeading: false,
       elevation: 0,
       centerTitle: false,

@@ -60,194 +60,214 @@ class _MenuPageState extends State<MenuPage> {
       // drawer: const DrawerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Text("Order"),
+        child: const Text("Order"),
       ),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
+        preferredSize: Size.fromHeight(110.0), // here the desired height
         child: MyAppbar(
+          actions: [],
           appbarTitle: 'Menu',
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(48.0),
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                width: MediaQuery.of(context).size.width - 50,
+                child: TextFormField(
+                  // controller: nameController,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color.fromARGB(255, 240, 240, 240),
+                      prefixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.search,
+                        ),
+                        color: const Color.fromARGB(255, 1, 101, 183),
+                      ),
+                      contentPadding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+                      border: InputBorder.none,
+                      labelText: 'search menu foods',
+                      labelStyle:
+                          TextStyle(color: Color.fromARGB(255, 1, 101, 183))),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(
-            8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Menus",
-                style: TextStyle(
-                    fontSize: 28.0,
-                    color: Color(0xFF000000),
-                    fontWeight: FontWeight.w300,
-                    fontFamily: "Merriweather"),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => MenuDetail(
-                  //       key: UniqueKey(),
-                  //       id: 0, // update the id value to the desired value
-                  //     ),
-                  //   ),
-                  // );
-                },
-                icon: const Icon(
-                  Icons.add,
-                  color: const Color(0xFF736c6c),
-                  size: 42.0,
-                ),
-              )
-            ],
-          ),
-          const Divider(
-            color: Colors.black87,
-          ),
-          const SizedBox(height: 10),
-          RefreshIndicator(
-            onRefresh: () async {
-              if (!_isLoading) {
-                // check if an API request is not already in progress
-                setState(() {
-                  _isLoading =
-                      true; // set the flag to true before starting the API request
-                });
-                await readJSon();
-                setState(() {
-                  _isLoading =
-                      false; // set the flag to false after the API request is completed
-                });
-              }
-            },
-            child: Container(
-                height: MediaQuery.of(context).size.height - 200,
-                child: FutureBuilder<List<MenuModel>>(
-                  future: readJSon(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<MenuModel> menus = snapshot.data!;
-                      return ListView.builder(
-                          itemCount: menus.length,
-                          itemBuilder: (context, index) {
-                            // checkV.addAll({index: false});
-                            // final mycheck = <int, bool>{index: false};
-                            // checkV.addEntries(mycheck.entries);
-                            // checkV.add(false);
-                            return Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 241, 241, 241),
-                                boxShadow: List.filled(
-                                  3,
-                                  const BoxShadow(
-                                    blurRadius: 4,
-                                    blurStyle: BlurStyle.outer,
-                                    color: Colors.black12,
-                                  ),
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    color: const Color.fromARGB(
-                                        255, 234, 234, 234),
-                                    padding: const EdgeInsets.all(10),
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(50),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(
+                8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 10),
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      if (!_isLoading) {
+                        // check if an API request is not already in progress
+                        setState(() {
+                          _isLoading =
+                              true; // set the flag to true before starting the API request
+                        });
+                        await readJSon();
+                        setState(() {
+                          _isLoading =
+                              false; // set the flag to false after the API request is completed
+                        });
+                      }
+                    },
+                    child: Container(
+                        height: MediaQuery.of(context).size.height - 200,
+                        child: FutureBuilder<List<MenuModel>>(
+                          future: readJSon(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              List<MenuModel> menus = snapshot.data!;
+                              return ListView.builder(
+                                  itemCount: menus.length,
+                                  itemBuilder: (context, index) {
+                                    // checkV.addAll({index: false});
+                                    // final mycheck = <int, bool>{index: false};
+                                    // checkV.addEntries(mycheck.entries);
+                                    // checkV.add(false);
+                                    return Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 241, 241, 241),
+                                        boxShadow: List.filled(
+                                          3,
+                                          const BoxShadow(
+                                            blurRadius: 4,
+                                            blurStyle: BlurStyle.outer,
+                                            color: Colors.black12,
+                                          ),
+                                        ),
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                      child: Image.asset(
-                                        'assets/images/menu1.png',
-                                        fit: BoxFit.contain,
-                                        width: 100.0,
-                                        height: 100.0,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 120,
-                                    // width: MediaQuery.of(context).size.width - 174,
-                                    padding: const EdgeInsets.only(left: 10),
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromARGB(255, 243, 243, 243),
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              menus[index].name,
-                                              style: const TextStyle(
-                                                  fontSize: 22.0,
-                                                  color: Color(0xFF000000),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: "Merriweather"),
-                                            ),
-                                            // SizedBox(height: 10,),
-                                            SizedBox(
-                                              width: 110,
-                                              child: Text(
-                                                menus[index].description,
-                                                softWrap: true,
-                                                style: const TextStyle(
-                                                    fontSize: 15.0,
-                                                    color: Color(0xFF000000),
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: "Merriweather"),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            color: const Color.fromARGB(
+                                                255, 234, 234, 234),
+                                            padding: const EdgeInsets.all(10),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(50),
+                                              ),
+                                              child: Image.asset(
+                                                'assets/images/menu1.png',
+                                                fit: BoxFit.contain,
+                                                width: 100.0,
+                                                height: 100.0,
                                               ),
                                             ),
-                                            Text(
-                                              menus[index].price.toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 20.0,
-                                                  color: Color(0xFF000000),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: "Merriweather"),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
+                                          ),
+                                          Container(
+                                            height: 120,
+                                            // width: MediaQuery.of(context).size.width - 174,
                                             padding:
                                                 const EdgeInsets.only(left: 10),
-                                            child: Checkbox(
-                                              value: false,
-                                              key:
-                                                  ValueKey(menus[index].dishId),
-                                              onChanged: (value) {
-                                                value = value;
-                                              },
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          });
-                    } else {
-                      return Center(
-                          child: Container(
-                              width: 40,
-                              height: 40,
-                              child: const CircularProgressIndicator()));
-                    }
-                  },
-                )),
+                                            decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 243, 243, 243),
+                                              borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(20),
+                                                bottomRight:
+                                                    Radius.circular(20),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Text(
+                                                      menus[index].name,
+                                                      style: const TextStyle(
+                                                          fontSize: 22.0,
+                                                          color:
+                                                              Color(0xFF000000),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily:
+                                                              "Merriweather"),
+                                                    ),
+                                                    // SizedBox(height: 10,),
+                                                    SizedBox(
+                                                      width: 110,
+                                                      child: Text(
+                                                        menus[index]
+                                                            .description,
+                                                        softWrap: true,
+                                                        style: const TextStyle(
+                                                            fontSize: 15.0,
+                                                            color: Color(
+                                                                0xFF000000),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily:
+                                                                "Merriweather"),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      menus[index]
+                                                          .price
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 20.0,
+                                                          color:
+                                                              Color(0xFF000000),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily:
+                                                              "Merriweather"),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Checkbox(
+                                                      value: false,
+                                                      key: ValueKey(
+                                                          menus[index].dishId),
+                                                      onChanged: (value) {
+                                                        value = value;
+                                                      },
+                                                    ))
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            } else {
+                              return Center(
+                                  child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      child:
+                                          const CircularProgressIndicator()));
+                            }
+                          },
+                        )),
+                  ),
+                ]),
           ),
-        ]),
+        ),
       ),
     );
   }

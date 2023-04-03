@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         showUnselectedLabels: true,
         selectedFontSize: 16,
         unselectedFontSize: 14,
-        selectedItemColor: Color.fromARGB(255, 1, 101, 183),
+        selectedItemColor: Colors.lightBlue,
         unselectedItemColor: Color.fromARGB(255, 104, 104, 104),
         backgroundColor: Colors.white,
 

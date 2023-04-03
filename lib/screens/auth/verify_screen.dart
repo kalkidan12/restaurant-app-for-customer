@@ -93,7 +93,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               margin: const EdgeInsetsDirectional.only(top: 20),
                               child: OtpTextField(
                                 numberOfFields: 5,
-                                borderColor: Colors.orange,
+                                borderColor: Colors.lightBlue,
                                 //set to true to show as box or false to show as dash
                                 showFieldAsBox: true,
                                 //runs when a code is typed in

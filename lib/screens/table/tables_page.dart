@@ -70,22 +70,22 @@ class _TablesListState extends State<TablesList> {
         padding: EdgeInsets.fromLTRB(
             8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Available Tables",
-                style: TextStyle(
-                    fontSize: 28.0,
-                    color: Color(0xFF000000),
-                    fontWeight: FontWeight.w300,
-                    fontFamily: "Merriweather"),
-              ),
-            ],
-          ),
-          const Divider(
-            color: Colors.black87,
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: const [
+          //     Text(
+          //       "Available Tables",
+          //       style: TextStyle(
+          //           fontSize: 28.0,
+          //           color: Color(0xFF000000),
+          //           fontWeight: FontWeight.w300,
+          //           fontFamily: "Merriweather"),
+          //     ),
+          //   ],
+          // ),
+          // const Divider(
+          //   color: Colors.black87,
+          // ),
           const SizedBox(height: 10),
           RefreshIndicator(
             onRefresh: () async {
@@ -121,7 +121,7 @@ class _TablesListState extends State<TablesList> {
                                   const BoxShadow(
                                     blurRadius: 4,
                                     blurStyle: BlurStyle.outer,
-                                    color: Colors.black12,
+                                    color: Color.fromARGB(31, 185, 185, 185),
                                   ),
                                 ),
                                 borderRadius: BorderRadius.circular(20),
@@ -145,14 +145,10 @@ class _TablesListState extends State<TablesList> {
                                   Expanded(
                                     child: Container(
                                       height: 120,
-                                      // width: MediaQuery.of(context).size.width - 174,
                                       padding: const EdgeInsets.only(left: 10),
                                       decoration: const BoxDecoration(
                                         color:
                                             Color.fromARGB(255, 243, 243, 243),
-                                        // border: Border.all(
-                                        //   color: Colors.black,
-                                        // ),
                                         borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
                                           bottomRight: Radius.circular(20),
@@ -166,54 +162,37 @@ class _TablesListState extends State<TablesList> {
                                         children: [
                                           Row(
                                             children: [
-                                              Container(
-                                                child: Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Text(
-                                                        "Table #${index + 1}",
-                                                        style: const TextStyle(
-                                                            fontSize: 22.0,
-                                                            color: Color(
-                                                                0xFF000000),
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontFamily:
-                                                                "Merriweather"),
-                                                      ),
-                                                      // SizedBox(height: 10,),
-                                                      SizedBox(
-                                                        width: 110,
-                                                        child: Row(
-                                                          children: [
-                                                            Expanded(
-                                                              child: const Text(
-                                                                "Number of sits: ",
-                                                                softWrap: true,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    color: Color(
-                                                                        0xFF000000),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontFamily:
-                                                                        "Merriweather"),
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              "${tables[index].noOfSeats}",
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Text(
+                                                      "Table #${index + 1}",
+                                                      style: const TextStyle(
+                                                          fontSize: 20.0,
+                                                          color:
+                                                              Color(0xFF000000),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily:
+                                                              "Merriweather"),
+                                                    ),
+                                                    // SizedBox(height: 10,),
+                                                    SizedBox(
+                                                      width: 110,
+                                                      child: Row(
+                                                        children: [
+                                                          const Expanded(
+                                                            child: Text(
+                                                              "Number of sits: ",
                                                               softWrap: true,
-                                                              style: const TextStyle(
+                                                              style: TextStyle(
                                                                   fontSize:
-                                                                      20.0,
+                                                                      15.0,
                                                                   color: Color(
                                                                       0xFF000000),
                                                                   fontWeight:
@@ -222,11 +201,24 @@ class _TablesListState extends State<TablesList> {
                                                                   fontFamily:
                                                                       "Merriweather"),
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                          Text(
+                                                            "${tables[index].noOfSeats}",
+                                                            softWrap: true,
+                                                            style: const TextStyle(
+                                                                fontSize: 20.0,
+                                                                color: Color(
+                                                                    0xFF000000),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    "Merriweather"),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               Container(
@@ -248,7 +240,7 @@ class _TablesListState extends State<TablesList> {
                                                   },
                                                   icon: const Icon(
                                                     Icons.book_rounded,
-                                                    color: Colors.blue,
+                                                    color: Colors.lightBlue,
                                                     size: 30.0,
                                                   ),
                                                 ),

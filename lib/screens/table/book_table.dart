@@ -43,6 +43,7 @@ class _BookTableState extends State<BookTable> {
     if (no_of_peoples > no_of_sits || no_of_peoples < 1) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+            backgroundColor: Colors.red,
             content: Text('The selected table has only $no_of_sits sits.')),
       );
 
@@ -50,7 +51,9 @@ class _BookTableState extends State<BookTable> {
     }
     if (DateTime.now().compareTo(booking_time_x) > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid date and time.')),
+        const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please enter a valid date and time.')),
       );
 
       return;
@@ -58,7 +61,9 @@ class _BookTableState extends State<BookTable> {
 
     if (DateTime.now().compareTo(booking_time_y) > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid date.')),
+        const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please enter a valid date.')),
       );
 
       return;
@@ -66,7 +71,9 @@ class _BookTableState extends State<BookTable> {
 
     if (booking_time_x.compareTo(booking_time_y) > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid date.')),
+        const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please enter a valid date.')),
       );
 
       return;
@@ -97,11 +104,12 @@ class _BookTableState extends State<BookTable> {
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+              backgroundColor: Colors.lightBlue,
               content: Text(
-                  'Table ${jsonDecode(response.body)['tableId']} created successfully!')),
+                  'Table ${jsonDecode(response.body)['tableId']} booked successfully!')),
         );
         int bookedId = jsonDecode(response.body)['booked_id'];
-        print(bookedId);
+        // print(bookedId);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -112,6 +120,7 @@ class _BookTableState extends State<BookTable> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+              backgroundColor: Colors.lightBlue,
               content: Text('Failed to create this table. Please try again!')),
         );
       }
@@ -119,10 +128,11 @@ class _BookTableState extends State<BookTable> {
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+              backgroundColor: Colors.lightBlue,
               content: Text('Failed to create this table. Please try again!')),
         );
       });
-      debugPrint(error.toString());
+      // debugPrint(error.toString());
     }
   }
 
@@ -134,7 +144,7 @@ class _BookTableState extends State<BookTable> {
         backgroundColor: Colors.blue,
         elevation: 0,
         title: const Text(
-          "OrderSupreme | Customer",
+          "Schedule Time",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -143,7 +153,7 @@ class _BookTableState extends State<BookTable> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: SingleChildScrollView(
@@ -152,13 +162,18 @@ class _BookTableState extends State<BookTable> {
           child: Form(
             key: _tableFormKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFormField(
                   initialValue: no_of_peoples.toString(),
                   keyboardType: TextInputType.number,
-                  decoration:
-                      const InputDecoration(labelText: 'Number of peoples'),
+                  decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 237, 237, 237),
+                      prefixIcon: Icon(Icons.numbers),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      labelText: 'Number of peoples'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter the number of peoples';
@@ -169,8 +184,15 @@ class _BookTableState extends State<BookTable> {
                     no_of_peoples = int.parse(value!);
                   },
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 DateTimeFormField(
                   decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 237, 237, 237),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
                     hintStyle: TextStyle(color: Colors.black45),
                     errorStyle: TextStyle(color: Colors.redAccent),
                     // border: OutlineInputBorder(),
@@ -182,8 +204,15 @@ class _BookTableState extends State<BookTable> {
                     booking_time_x = value;
                   },
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 DateTimeFormField(
                   decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 237, 237, 237),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
                     hintStyle: TextStyle(color: Colors.black45),
                     errorStyle: TextStyle(color: Colors.redAccent),
                     // border: OutlineInputBorder(),
@@ -195,23 +224,25 @@ class _BookTableState extends State<BookTable> {
                     booking_time_y = value;
                   },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _submitForm,
-                      child: Text(
-                        'Book',
-                        style: const TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Merriweather"),
-                      ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  width: 135,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: _submitForm,
+                    child: const Text(
+                      'Book',
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Merriweather"),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
                 )
               ],
             ),

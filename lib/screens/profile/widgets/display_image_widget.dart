@@ -15,7 +15,7 @@ class DisplayImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Colors.orange[800]!;
+    final color = Colors.lightBlue;
 
     return Center(
         child: Stack(children: [
