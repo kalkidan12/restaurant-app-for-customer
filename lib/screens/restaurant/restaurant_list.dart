@@ -84,18 +84,18 @@ class _RestaurantListState extends State<RestaurantList> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: 50),
-        child: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 1, 101, 183),
-          onPressed: () {},
-          child: Icon(Icons.qr_code),
-        ),
-      ),
+      // floatingActionButton: Container(
+      //   margin: EdgeInsets.only(bottom: 50),
+      //   child: FloatingActionButton(
+      //     backgroundColor: Color.fromARGB(255, 1, 101, 183),
+      //     onPressed: () {},
+      //     child: Icon(Icons.qr_code),
+      //   ),
+      // ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(110.0), // here the desired height
         child: MyAppbar(
-          appbarTitle: 'Hello, Kalkidan',
+          appbarTitle: 'Hello, Username',
           actions: [
             Container(
               alignment: Alignment.center,

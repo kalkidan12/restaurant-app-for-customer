@@ -89,10 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
               backgroundColor: const Color.fromARGB(255, 235, 235, 235),
               resizeToAvoidBottomInset: false, //new line
 
-              // appBar: const PreferredSize(
-              //   preferredSize: Size.fromHeight(50.0), // here the desired height
-              //   child: MyAppbarForAuthPage(),
-              // ),
               body: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -129,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 // padding:
                                 // const EdgeInsets.only(top: 10, bottom: 10),
                                 child: const Text(
