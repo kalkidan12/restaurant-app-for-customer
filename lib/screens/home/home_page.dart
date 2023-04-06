@@ -93,12 +93,12 @@ class _HomePageState extends State<HomePage> {
         // create the list of navigation bar items
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant),
-            label: 'Restaurants',
+            icon: Icon(Icons.home_filled),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'My Orders',
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
