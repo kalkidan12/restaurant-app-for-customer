@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantappforcustomer/screens/home/home_page.dart';
 import 'package:restaurantappforcustomer/screens/menu/menu_detail.dart';
 import 'package:restaurantappforcustomer/screens/restaurant/restaurant_list.dart';
 
@@ -18,8 +19,8 @@ class _MenuListState extends State<MenuList> {
         elevation: 0.5,
         leading: IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RestaurantList()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
             },
             icon: const Icon(
               Icons.arrow_back_ios,
