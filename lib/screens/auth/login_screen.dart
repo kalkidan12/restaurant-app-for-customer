@@ -8,7 +8,6 @@ import 'package:restaurantappforcustomer/api/config.dart';
 import 'package:restaurantappforcustomer/screens/auth/register_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/reset_password.dart';
 
-import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
 import '../home/home_page.dart';
 
@@ -92,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               body: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/login.jpg"),
+                      image: AssetImage("assets/images/log.jpeg"),
                       fit: BoxFit.cover,
                       opacity: 0.7,
                     ),

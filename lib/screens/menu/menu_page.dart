@@ -70,7 +70,7 @@ class _MenuPageState extends State<MenuPage> {
         child: const Text("Order"),
       ),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0), // here the desired height
+        preferredSize: Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(
           actions: [
             Container(
@@ -78,34 +78,6 @@ class _MenuPageState extends State<MenuPage> {
                 child: _shoppingCartBadge()),
           ],
           appbarTitle: 'Menu',
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(48.0),
-            child: Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                width: MediaQuery.of(context).size.width - 50,
-                child: TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  // controller: nameController,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromARGB(255, 240, 240, 240),
-                      prefixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.search,
-                        ),
-                        color: const Color.fromARGB(255, 1, 101, 183),
-                      ),
-                      contentPadding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                      border: InputBorder.none,
-                      hintText: 'search menu foods',
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 1, 101, 183))),
-                ),
-              ),
-            ),
-          ),
         ),
       ),
       body: SafeArea(

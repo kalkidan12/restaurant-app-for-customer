@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/model/table_model.dart';
+import 'package:restaurantappforcustomer/screens/menu/menu_list.dart';
 import 'package:restaurantappforcustomer/screens/menu/menu_page.dart';
 import 'package:restaurantappforcustomer/screens/restaurant/restaurant_list.dart';
+import 'package:restaurantappforcustomer/widgets/app_bar.dart';
 
 import '../../api/config.dart';
 
@@ -113,9 +115,12 @@ class _BookTableState extends State<BookTable> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                MenuPage(restaurantId: restaurantId, bookedTableId: bookedId),
+            builder: (context) => MenuList(),
           ),
+          // MaterialPageRoute(
+          //   builder: (context) =>
+          //       MenuPage(restaurantId: restaurantId, bookedTableId: bookedId),
+          // ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -140,20 +145,18 @@ class _BookTableState extends State<BookTable> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        elevation: 0,
-        title: const Text(
-          "Schedule Time",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0), // here the desired height
+        child: MyAppbar(
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Color.fromARGB(255, 37, 37, 37),
+              )),
+          appbarTitle: 'Tables',
         ),
       ),
       body: SingleChildScrollView(

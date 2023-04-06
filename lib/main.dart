@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:restaurantappforcustomer/screens/auth/continue_reg_page.dart';
 import 'package:restaurantappforcustomer/screens/auth/login_screen.dart';
+import 'package:restaurantappforcustomer/screens/menu/menu_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           primary: Colors.lightBlue,
         ),
       ),
-      home: LoginScreen(), //ContinueRegister(),
+      home: LoginScreen(), //MenuList(), , //ContinueRegister(),
     );
   }
 }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/api/config.dart';
 
-import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
 import 'continue_reg_page.dart';
 

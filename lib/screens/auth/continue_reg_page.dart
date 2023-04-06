@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 
 import '../../api/config.dart';
-import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
 import '../home/home_page.dart';
 
@@ -145,6 +144,11 @@ class _ContinueRegisterState extends State<ContinueRegister> {
             body: Container(
                 height: height,
                 decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/login.jpg"),
+                    fit: BoxFit.cover,
+                    opacity: 0.7,
+                  ),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

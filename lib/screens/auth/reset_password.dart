@@ -9,7 +9,6 @@ import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/screens/auth/verify_screen.dart';
 
 import '../../api/config.dart';
-import '../../widgets/app_bar_for_auth.dart';
 import '../../widgets/custom_container.dart';
 import '../home/home_page.dart';
 

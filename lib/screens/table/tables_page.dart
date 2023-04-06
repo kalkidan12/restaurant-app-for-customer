@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:restaurantappforcustomer/model/table_model.dart';
+import 'package:restaurantappforcustomer/screens/restaurant/restaurant_list.dart';
 import 'package:restaurantappforcustomer/screens/table/book_table.dart';
 import 'package:restaurantappforcustomer/widgets/darwer_widget.dart';
 
@@ -62,30 +63,20 @@ class _TablesListState extends State<TablesList> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RestaurantList()));
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Color.fromARGB(255, 37, 37, 37),
+              )),
           appbarTitle: 'Tables',
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(
-            8 * screenWidth / 100, 20, 7 * screenWidth / 100, 0),
+      body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: const [
-          //     Text(
-          //       "Available Tables",
-          //       style: TextStyle(
-          //           fontSize: 28.0,
-          //           color: Color(0xFF000000),
-          //           fontWeight: FontWeight.w300,
-          //           fontFamily: "Merriweather"),
-          //     ),
-          //   ],
-          // ),
-          // const Divider(
-          //   color: Colors.black87,
-          // ),
           const SizedBox(height: 10),
           RefreshIndicator(
             onRefresh: () async {
@@ -110,6 +101,10 @@ class _TablesListState extends State<TablesList> {
                     if (snapshot.hasData) {
                       List<TableModel> tables = snapshot.data!;
                       return ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.only(
+                              top: 10, left: 20, right: 20, bottom: 20),
+                          shrinkWrap: true,
                           itemCount: tables.length,
                           itemBuilder: (context, index) {
                             return Container(

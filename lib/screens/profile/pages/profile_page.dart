@@ -23,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0), // here the desired height
         child: MyAppbar(
-          appbarTitle: 'Profile',
+          appbarTitle: 'My Profile',
         ),
       ),
       body: Padding(
