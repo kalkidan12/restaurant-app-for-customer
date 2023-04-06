@@ -39,13 +39,13 @@ class _RestaurantListState extends State<RestaurantList> {
         RestaurantModel mapedData =
             RestaurantModel.fromJson(jsonDecode(response.body));
         List<Result> restaurants = mapedData.results.toList();
-        print(restaurants);
+        // print(restaurants);
         setState(() {
           _isLoading = true;
         });
         return restaurants;
       } else {
-        print(response.body);
+        // print(response.body);
         // There is already a profile with this account
         return [];
       }
